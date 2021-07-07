@@ -14,6 +14,8 @@ class LinkViewVertical extends StatelessWidget {
   final bool isIcon;
   final double? radius;
   final Color? bgColor;
+  final bool? showBody;
+  final bool? showTitle;
 
   LinkViewVertical({
     Key? key,
@@ -30,6 +32,8 @@ class LinkViewVertical extends StatelessWidget {
     this.isIcon = false,
     this.bgColor,
     this.radius,
+    this.showBody = true,
+    this.showTitle = true,
   }) : super(key: key);
 
   double computeTitleFontSize(double height) {
@@ -94,9 +98,15 @@ class LinkViewVertical extends StatelessWidget {
                             ),
                     )
                   : SizedBox(height: 5),
-              _buildTitleContainer(
-                  _titleTS, computeTitleLines(layoutHeight, layoutWidth)),
-              _buildBodyContainer(_bodyTS, computeBodyLines(layoutHeight)),
+              Visibility(
+                child: _buildTitleContainer(
+                    _titleTS, computeTitleLines(layoutHeight, layoutWidth)),
+                visible: showTitle ?? true,
+              ),
+              Visibility(
+                  child: _buildBodyContainer(
+                      _bodyTS, computeBodyLines(layoutHeight)),
+                  visible: showBody ?? true),
             ],
           ));
     });

@@ -14,6 +14,8 @@ class LinkViewHorizontal extends StatelessWidget {
   final bool isIcon;
   final double? radius;
   final Color? bgColor;
+  final bool? showBody;
+  final bool? showTitle;
 
   LinkViewHorizontal({
     Key? key,
@@ -30,6 +32,8 @@ class LinkViewHorizontal extends StatelessWidget {
     this.isIcon = false,
     this.bgColor,
     this.radius,
+    this.showBody = true,
+    this.showTitle = true,
   }) : super(key: key);
 
   double computeTitleFontSize(double width) {
@@ -98,20 +102,23 @@ class LinkViewHorizontal extends StatelessWidget {
                             ),
                     )
                   : SizedBox(width: 5),
-              Expanded(
-                flex: 4,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 3),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _buildTitleContainer(
-                          _titleFontSize, computeTitleLines(layoutHeight)),
-                      _buildBodyContainer(
-                          _bodyFontSize, computeBodyLines(layoutHeight))
-                    ],
+              Visibility(
+                child: Expanded(
+                  flex: 4,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 3),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        _buildTitleContainer(
+                            _titleFontSize, computeTitleLines(layoutHeight)),
+                        _buildBodyContainer(
+                            _bodyFontSize, computeBodyLines(layoutHeight))
+                      ],
+                    ),
                   ),
                 ),
+                visible: (showTitle ?? true) && (showBody ?? true),
               ),
             ],
           ),
