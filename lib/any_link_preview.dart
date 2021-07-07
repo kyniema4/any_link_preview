@@ -81,6 +81,9 @@ class AnyLinkPreview extends StatefulWidget {
   /// Box shadow for the card. Deafults to `[BoxShadow(blurRadius: 3, color: Colors.grey)]`
   final List<BoxShadow>? boxShadow;
 
+  final bool? showBody;
+  final bool? showTitle;
+
   AnyLinkPreview({
     this.key,
     required this.link,
@@ -100,6 +103,8 @@ class AnyLinkPreview extends StatefulWidget {
     this.borderRadius,
     this.boxShadow,
     this.removeElevation = false,
+    this.showBody = true,
+    this.showTitle = true,
   }) : super(key: key);
 
   @override
@@ -205,6 +210,8 @@ class _AnyLinkPreviewState extends State<AnyLinkPreview> {
               isIcon: isIcon,
               bgColor: widget.backgroundColor,
               radius: widget.borderRadius ?? 12,
+              showBody: widget.showBody,
+              showTitle: widget.showTitle,
             )
           : LinkViewVertical(
               key: widget.key ?? Key(widget.link.toString()),
@@ -221,6 +228,8 @@ class _AnyLinkPreviewState extends State<AnyLinkPreview> {
               isIcon: isIcon,
               bgColor: widget.backgroundColor,
               radius: widget.borderRadius ?? 12,
+              showBody: widget.showBody,
+              showTitle: widget.showTitle,
             ),
     );
   }
